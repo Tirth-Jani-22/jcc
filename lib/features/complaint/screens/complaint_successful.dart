@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -8,11 +9,23 @@ import 'package:lottie/lottie.dart';
 
 import '../../../bloc/complaint/complaint_bloc.dart';
 
-class ComplaintSuccess extends StatelessWidget {
+class ComplaintSuccess extends StatefulWidget {
   const ComplaintSuccess({super.key, required this.id});
 
   final String id;
+  @override
+  State<ComplaintSuccess> createState() => _ComplaintSuccessState();
+}
 
+class _ComplaintSuccessState extends State<ComplaintSuccess> {
+  AudioPlayer player = AudioPlayer();
+  @override
+  void initState() {
+    // TODO: implement initState
+    player.play(
+      AssetSource('notificationSound/song.mp3'));
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,7 +71,7 @@ class ComplaintSuccess extends StatelessWidget {
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
                   Text(
-                    id,
+                    widget.id,
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                           fontWeight: FontWeight.w600,
                         ),
